@@ -1,0 +1,79 @@
+---
+title: Niri
+description: Full Niri integration
+---
+
+zlaunch has full support for Niri with native IPC integration.
+
+## Features
+
+| Feature | Status |
+|---------|--------|
+| Window switching | ✓ Full |
+| Clipboard history | ✓ Full |
+| Workspace awareness | ✓ Full |
+| Focus tracking | ✓ Full |
+| Layer shell | ✓ Full |
+
+## Setup
+
+<Steps>
+<Step>
+### Autostart
+
+Add to `~/.config/niri/config.kdl`:
+
+```kdl
+spawn-at-startup "zlaunch"
+```
+</Step>
+
+<Step>
+### Keybind
+
+```kdl
+binds {
+    Mod+Space { spawn "zlaunch" "toggle"; }
+}
+```
+</Step>
+
+<Step>
+### Mode-specific binds (optional)
+
+```kdl
+binds {
+    Mod+E { spawn "zlaunch" "show" "--modes" "emojis"; }
+    Mod+V { spawn "zlaunch" "show" "--modes" "clipboard"; }
+}
+```
+</Step>
+</Steps>
+
+## IPC Details
+
+zlaunch communicates via the Niri socket at `$NIRI_SOCKET`.
+
+JSON protocol commands:
+- `{"Windows"}` — List windows
+- `{"Action":{"FocusWindow":{"id":N}}}` — Focus window by ID
+
+## Blur
+
+<Callout type="info">
+Niri doesn't support automatic blur rules via IPC. Configure blur in your Niri config if desired.
+</Callout>
+
+## Troubleshooting
+
+<Callout type="warn">
+**Windows not showing?**
+- Verify `$NIRI_SOCKET` is set
+- Check socket is accessible
+</Callout>
+
+<Callout type="warn">
+**Clipboard not working?**
+- Niri supports wlr-data-control by default
+- Verify clipboard works in other apps first
+</Callout>

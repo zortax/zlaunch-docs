@@ -1,0 +1,70 @@
+---
+title: Basic Usage
+description: Core workflow and keyboard navigation
+---
+
+## Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `↑` / `↓` | Navigate items |
+| `Tab` / `Shift+Tab` | Navigate grid (emoji mode) |
+| `Enter` | Execute selected item |
+| `Escape` | Hide launcher / go back |
+| `Ctrl+Tab` | Next mode |
+| `Ctrl+Shift+Tab` | Previous mode |
+
+## Searching
+
+Just start typing. zlaunch uses fuzzy matching—you don't need exact names.
+
+> Type `fire` to find Firefox, `code` for VS Code, `term` for terminal.
+
+## Modes
+
+zlaunch has multiple modes, each focusing on different functionality:
+
+| Mode | Description |
+|------|-------------|
+| **Combined** | All modules together (default) |
+| **Applications** | Desktop applications only |
+| **Windows** | Open windows only |
+| **Emojis** | Emoji picker grid |
+| **Clipboard** | Clipboard history |
+| **Calculator** | Math expression evaluator |
+| **Actions** | System actions (shutdown, etc.) |
+| **Search** | Web search |
+| **AI** | LLM chat interface |
+
+### Switching Modes
+
+<Tabs items={['Keyboard', 'CLI']}>
+<Tab value="Keyboard">
+
+- `Ctrl+Tab` — next mode
+- `Ctrl+Shift+Tab` — previous mode
+
+</Tab>
+<Tab value="CLI">
+
+```bash
+zlaunch show --modes emojis
+zlaunch toggle --modes clipboard
+```
+
+</Tab>
+</Tabs>
+
+## Executing Items
+
+Press `Enter` on the selected item:
+
+| Item Type | Action |
+|-----------|--------|
+| Application | Launch the app |
+| Window | Focus the window |
+| Calculator | Copy result to clipboard |
+| Emoji | Copy emoji to clipboard |
+| Clipboard | Copy back to clipboard |
+| Action | Execute (shutdown, lock, etc.) |
+| Search | Open in browser |

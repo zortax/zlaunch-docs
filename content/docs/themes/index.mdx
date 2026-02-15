@@ -1,0 +1,66 @@
+---
+title: Themes
+description: Customize zlaunch appearance
+---
+
+zlaunch includes 15 bundled themes and supports custom themes.
+
+## Setting a Theme
+
+<Tabs items={['Config File', 'CLI', 'In Launcher']}>
+<Tab value="Config File">
+
+```toml
+theme = "one-dark"
+```
+
+</Tab>
+<Tab value="CLI">
+
+```bash
+# Show current theme
+zlaunch theme
+
+# List available themes
+zlaunch theme list
+
+# Set theme
+zlaunch theme set dracula
+```
+
+</Tab>
+<Tab value="In Launcher">
+
+Open the themes mode to switch interactively:
+
+```bash
+zlaunch show --modes themes
+```
+
+Or in combined mode, search for theme names.
+
+</Tab>
+</Tabs>
+
+## Theme Location
+
+Custom themes are stored in:
+
+```
+~/.config/zlaunch/themes/
+```
+
+Create this directory and add `.toml` files for your custom themes.
+
+<Callout type="info">
+Themes are hot-reloaded when files change.
+</Callout>
+
+<Cards>
+  <Card title="Bundled Themes" href="/docs/themes/bundled">
+    15 included color schemes
+  </Card>
+  <Card title="Custom Themes" href="/docs/themes/custom">
+    Create your own theme
+  </Card>
+</Cards>

@@ -1,0 +1,75 @@
+---
+title: Fuzzy Matching
+description: Tune fuzzy search scoring behavior
+---
+
+zlaunch uses fuzzy matching to find items. Tune the scoring algorithm in your config:
+
+```toml
+[fuzzy_match]
+exact_match_bonus = 100000
+prefix_match_bonus = 50000
+word_prefix_bonus = 25000
+contiguity_bonus = 10000
+description_penalty = 0.3
+action_score_multiplier = 0.8
+submenu_score_multiplier = 0.9
+show_best_match = true
+```
+
+## Scoring Bonuses
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `exact_match_bonus` | 100000 | Bonus for exact name match |
+| `prefix_match_bonus` | 50000 | Bonus for matching start of name |
+| `word_prefix_bonus` | 25000 | Bonus for matching start of a word |
+| `contiguity_bonus` | 10000 | Bonus for consecutive character matches |
+
+<Callout type="info">
+Higher values make that match type rank better in results.
+</Callout>
+
+## Penalties and Multipliers
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `description_penalty` | 0.3 | Score multiplier for description-only matches |
+| `action_score_multiplier` | 0.8 | Score multiplier for action items |
+| `submenu_score_multiplier` | 0.9 | Score multiplier for submenu items |
+
+> Lower values demote those item types in results.
+
+## Best Match Promotion
+
+```toml
+[fuzzy_match]
+show_best_match = true  # default
+```
+
+When enabled, the highest-scoring item is promoted to the top regardless of category ordering.
+
+## Examples
+
+<Tabs items={['Prioritize Exact Matches', 'Demote Actions']}>
+<Tab value="Prioritize Exact Matches">
+
+```toml
+[fuzzy_match]
+exact_match_bonus = 200000
+prefix_match_bonus = 100000
+show_best_match = true
+```
+
+</Tab>
+<Tab value="Demote Actions">
+
+```toml
+[fuzzy_match]
+action_score_multiplier = 0.5
+```
+
+Actions will rank lower unless you specifically search for them.
+
+</Tab>
+</Tabs>

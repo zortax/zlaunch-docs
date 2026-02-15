@@ -1,0 +1,62 @@
+---
+title: Bundled Themes
+description: List of included themes
+---
+
+zlaunch includes 15 bundled themes.
+
+<img src="/img/themes-gallery.webp" alt="A selection of bundled themes" />
+
+| Theme | Style |
+|-------|-------|
+| `ayu-dark` | Warm, soft colors |
+| `catppuccin-latte` | Light pastel |
+| `catppuccin-mocha` | Dark pastel |
+| `dracula` | Purple-accented dark |
+| `everforest` | Green-tinted forest |
+| `gruvbox-dark` | Warm retro dark |
+| `kanagawa` | Japanese wave colors |
+| `material` | Material design dark |
+| `monokai` | Classic code theme |
+| `nord` | Arctic blue tones |
+| `one-dark` | Atom editor theme |
+| `rose-pine` | Muted warm pink |
+| `solarized-dark` | High contrast dark |
+| `synthwave` | Retro neon |
+| `tokyo-night` | Cool night colors |
+
+## Applying a Theme
+
+<Tabs items={['Config', 'CLI']}>
+<Tab value="Config">
+
+```toml
+# In ~/.config/zlaunch/config.toml
+theme = "catppuccin-mocha"
+```
+
+</Tab>
+<Tab value="CLI">
+
+```bash
+zlaunch theme set catppuccin-mocha
+```
+
+Changes apply immediately.
+
+</Tab>
+</Tabs>
+
+## Previewing Themes
+
+Use the themes mode to quickly preview:
+
+```bash
+zlaunch show --modes themes
+```
+
+Search for a theme name and press Enter to apply it.
+
+<Callout type="info">
+Theme changes are instant—no restart needed.
+</Callout>

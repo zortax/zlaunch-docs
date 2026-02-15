@@ -1,13 +1,112 @@
 ---
-title: Hello World
-description: Your first document
+title: Introduction
+description: A fast, feature-rich application launcher for Wayland
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+zlaunch is a fast application launcher and window switcher for Linux Wayland desktops, written in Rust using the GPUI framework.
 
-## What is Next?
+<img src="/img/hero.webp" alt="zlaunch in combined mode" />
+
+## Why zlaunch?
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
+  <Card title="Instant Response" icon={<span>⚡</span>}>
+    Daemon architecture means the launcher appears instantly—no startup delay. It also enables clipboard history monitoring.
+  </Card>
+  <Card title="All-in-One" icon={<span>🎯</span>}>
+    Launch apps, switch windows, calculate, pick emojis, browse clipboard history, search the web, and chat with AI—all from one interface.
+  </Card>
+  <Card title="Wayland-Native" icon={<span>🖥️</span>}>
+    Built for Wayland with first-class Hyprland and Niri support, including automatic blur and workspace awareness.
+  </Card>
+  <Card title="Customizable" icon={<span>🎨</span>}>
+    15 bundled themes, custom theme support, and extensive TOML configuration.
+  </Card>
+</Cards>
+
+## Features
+
+| Category | Features |
+|----------|----------|
+| **Launcher** | Fuzzy search, terminal app support, icon themes |
+| **Windows** | Switch & focus, workspace info, compositor integration |
+| **Utilities** | Calculator, emoji picker, clipboard history |
+| **Search** | Configurable web search providers |
+| **AI** | Ollama, Gemini, OpenAI, OpenRouter support |
+| **Theming** | 15 themes, custom TOML themes, hot-reload |
+
+## Philosophy
+
+zlaunch aims to sit in a sweet spot between minimal launchers and feature-rich power tools:
+
+- **Zero-config useful** — Works great out of the box with sensible defaults. No plugins to install, no themes to configure, no scripts to write. Just install and go.
+
+- **Batteries included** — Calculator, emoji picker, clipboard history, window switching, web search, and AI are built-in and well-integrated. More useful than a basic app launcher without any setup.
+
+- **Opinionated, not infinitely flexible** — zlaunch is not a dmenu replacement or a scriptable tool for building custom menus. It does one thing well: be a great launcher.
+
+## Comparison
+
+| Launcher | Philosophy | Wayland | Built-in Features |
+|----------|------------|:-------:|-------------------|
+| **zlaunch** | Opinionated, batteries-included | Native | Apps, windows, calculator, emoji, clipboard, search, AI, themes |
+| [Rofi](https://github.com/davatorium/rofi) | Flexible, scriptable, themeable | 2.0 beta | Apps, windows, SSH, dmenu mode (calculator etc. via plugins) |
+| [Vicinae](https://github.com/vicinaehq/vicinae) | Raycast-like, extension ecosystem | Native | Apps, clipboard, emoji, extensions via React/TypeScript |
+| [Fuzzel](https://codeberg.org/dnkl/fuzzel) | Minimal, fast, simple | Native | Apps, dmenu mode |
+| [Anyrun](https://github.com/anyrun-org/anyrun) | Modular, plugin-based | Native | Apps, calculator, symbols, websearch (via plugins) |
+| [Albert](https://albertlauncher.github.io/) | Plugin-based, feature-rich | X11 | Apps, files, calculator, web search (via plugins) |
+| [KRunner](https://userbase.kde.org/Plasma/Krunner) | KDE-integrated, powerful | KDE | Apps, calculator, units, windows, files, and much more |
+
+**When to choose zlaunch:**
+- You want a feature-rich launcher that works immediately without configuration
+- You use Hyprland or Niri and want native integration
+- You prefer a curated, cohesive experience over infinite extensibility
+
+**When to choose something else:**
+- You need dmenu compatibility or custom scripted menus → Rofi, Fuzzel
+- You want a Raycast-like extension ecosystem → Vicinae
+- You need maximum flexibility and don't mind configuration → Rofi, Anyrun
+- You're on KDE → KRunner is already excellent
+
+## Quick Start
+
+<Steps>
+<Step>
+### Install zlaunch
+
+Choose your installation method: [Nix flake](/docs/getting-started/installation#nix--nixos), [AUR](/docs/getting-started/installation#arch-linux-aur), or [build from source](/docs/getting-started/installation#building-from-source).
+</Step>
+
+<Step>
+### Start the daemon
+
+```bash
+zlaunch
+```
+</Step>
+
+<Step>
+### Bind a key
+
+Add to your compositor config (e.g., Hyprland):
+
+```bash
+bind = SUPER, Space, exec, zlaunch toggle
+```
+</Step>
+
+<Step>
+### Launch!
+
+Press your keybind, type to search, and press Enter.
+</Step>
+</Steps>
+
+## Documentation
+
+<Cards>
+  <Card title="Installation" href="/docs/getting-started/installation" />
+  <Card title="Configuration" href="/docs/configuration" />
+  <Card title="Modules" href="/docs/modules" />
+  <Card title="CLI Reference" href="/docs/cli" />
 </Cards>

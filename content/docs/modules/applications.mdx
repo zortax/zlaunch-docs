@@ -1,0 +1,75 @@
+---
+title: Applications
+description: Launch desktop applications
+---
+
+The applications module lets you search and launch installed desktop applications.
+
+<img src="/img/modules-applications.webp" alt="Application search with fuzzy matching" />
+
+## How It Works
+
+zlaunch scans `.desktop` files from standard XDG directories:
+
+- `/usr/share/applications/`
+- `~/.local/share/applications/`
+- Other directories in `$XDG_DATA_DIRS`
+
+Applications are indexed with their name, description, and categories for fuzzy search.
+
+## Usage
+
+<Steps>
+<Step>
+### Open zlaunch
+Press your keybind or run `zlaunch show`
+</Step>
+
+<Step>
+### Type to search
+Fuzzy matching means you don't need exact names: `fire` → Firefox, `code` → VS Code
+</Step>
+
+<Step>
+### Press Enter
+The application launches
+</Step>
+</Steps>
+
+## Terminal Applications
+
+Applications marked with `Terminal=true` in their `.desktop` file are launched in your terminal.
+
+<Callout type="warn">
+Set the `$TERMINAL` environment variable in your shell profile:
+
+```bash
+export TERMINAL=kitty
+```
+
+Fallback detection: `kitty`, `alacritty`, `foot`, `wezterm`, `gnome-terminal`, `konsole`
+</Callout>
+
+## Icons
+
+Icons are loaded following the freedesktop icon theme spec. If an icon isn't found, a generic fallback is used.
+
+## Environment
+
+Launched applications inherit the session environment captured when the daemon started:
+
+- `DISPLAY`, `WAYLAND_DISPLAY`
+- `XDG_CURRENT_DESKTOP`
+- Theme variables (`QT_QPA_PLATFORMTHEME`, etc.)
+
+<Callout type="info">
+Applications spawn as detached processes—they survive if zlaunch is restarted.
+</Callout>
+
+## Mode Access
+
+```bash
+zlaunch show --modes applications
+# or
+zlaunch show --modes apps
+```

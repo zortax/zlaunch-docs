@@ -1,0 +1,84 @@
+---
+title: Calculator
+description: Evaluate math expressions
+---
+
+The calculator module provides real-time math expression evaluation.
+
+<img src="/img/modules-calculator.webp" alt="Calculator evaluating an expression" />
+
+## Usage
+
+Type a math expression and see the result instantly. Press Enter to copy the result to clipboard.
+
+## Examples
+
+| Expression | Result |
+|------------|--------|
+| `2 + 2` | 4 |
+| `sqrt(16)` | 4 |
+| `sin(pi/2)` | 1 |
+| `100 * 1.15` | 115 |
+| `2^10` | 1024 |
+| `log(100)` | 2 |
+
+## Supported Operations
+
+<Tabs items={['Arithmetic', 'Functions', 'Constants']}>
+<Tab value="Arithmetic">
+
+| Operator | Description |
+|----------|-------------|
+| `+`, `-`, `*`, `/` | Basic operations |
+| `^` or `**` | Exponentiation |
+| `%` | Modulo |
+| `( )` | Grouping |
+
+</Tab>
+<Tab value="Functions">
+
+| Function | Description |
+|----------|-------------|
+| `sqrt`, `cbrt` | Square/cube root |
+| `sin`, `cos`, `tan` | Trigonometry |
+| `asin`, `acos`, `atan` | Inverse trig |
+| `log`, `ln` | Logarithms (log is base 10) |
+| `abs`, `floor`, `ceil`, `round` | Rounding |
+| `exp` | e^x |
+
+</Tab>
+<Tab value="Constants">
+
+| Constant | Value |
+|----------|-------|
+| `pi` | π (3.14159...) |
+| `e` | Euler's number (2.71828...) |
+
+</Tab>
+</Tabs>
+
+## Unit Conversions
+
+```
+5 km to m          → 5000 m
+100 F to C         → 37.78 °C
+1 hour to seconds  → 3600 seconds
+```
+
+## Result Formatting
+
+Results are formatted with thousand separators for readability. When copying, the raw number (without formatting) is placed in your clipboard.
+
+<Callout type="info">
+Invalid expressions show an error indicator. Common issues: division by zero, invalid function names, mismatched parentheses.
+</Callout>
+
+## Mode Access
+
+```bash
+zlaunch show --modes calculator
+# or
+zlaunch show --modes calc
+```
+
+> **Tip:** In combined mode, just start typing a math expression and the calculator result will appear automatically.

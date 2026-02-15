@@ -1,0 +1,54 @@
+---
+title: Search
+description: Web search with configurable providers
+---
+
+The search module lets you search the web using configurable providers.
+
+<img src="/img/modules-search.webp" alt="Web search with trigger prefix" />
+
+## Default Providers
+
+| Trigger | Provider |
+|---------|----------|
+| `!g` | Google |
+| `!d` | DuckDuckGo |
+| `!wiki` | Wikipedia |
+| `!yt` | YouTube |
+
+## Usage
+
+Type the trigger followed by your search query:
+
+```
+!g rust programming
+!wiki wayland protocol
+!yt linux rice
+```
+
+Press Enter to open the search in your default browser.
+
+<Callout type="info">
+If you type something that doesn't match any application or other module, search will offer to use your default provider.
+</Callout>
+
+## Adding Providers
+
+See [Search Providers Configuration](/docs/configuration/search-providers) for details.
+
+Quick example:
+
+```toml
+[[search_providers]]
+name = "GitHub"
+trigger = "!gh"
+url = "https://github.com/search?q={query}"
+```
+
+## Mode Access
+
+```bash
+zlaunch show --modes search
+```
+
+In search-only mode, any input becomes a search query without needing a trigger.

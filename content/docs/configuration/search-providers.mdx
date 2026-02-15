@@ -1,0 +1,77 @@
+---
+title: Search Providers
+description: Configure web search engines
+---
+
+zlaunch includes built-in search providers and supports custom ones.
+
+## Default Providers
+
+| Name | Trigger |
+|------|---------|
+| Google | `!g` |
+| DuckDuckGo | `!d` |
+| Wikipedia | `!wiki` |
+| YouTube | `!yt` |
+
+## Adding Custom Providers
+
+```toml
+[[search_providers]]
+name = "GitHub"
+trigger = "!gh"
+url = "https://github.com/search?q={query}"
+icon = "brain"
+
+[[search_providers]]
+name = "Brave Search"
+trigger = "!br"
+url = "https://search.brave.com/search?q={query}"
+
+[[search_providers]]
+name = "Reddit"
+trigger = "!r"
+url = "https://www.reddit.com/search/?q={query}"
+```
+
+## Provider Options
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `name` | Yes | Display name in launcher |
+| `trigger` | Yes | Prefix to activate (e.g., `!g`) |
+| `url` | Yes | Search URL with `{query}` placeholder |
+| `icon` | No | Icon name (see below) |
+
+### Available Icons
+
+| Icon Name | Description |
+|-----------|-------------|
+| `magnifying-glass` | Default search icon |
+| `globe` | Web/internet |
+| `book-open` | Documentation/wiki |
+| `youtube-logo` | Video |
+| `brain` | AI/code |
+| `terminal` | Developer tools |
+| `file` / `file-text` | Files |
+| `image` | Images |
+
+## Usage
+
+Type the trigger followed by your query:
+
+```
+!gh zlaunch          # Search GitHub for "zlaunch"
+!wiki rust lang      # Search Wikipedia for "rust lang"
+!yt tutorial         # Search YouTube for "tutorial"
+```
+
+Press Enter to open the search in your default browser.
+
+<Callout type="info">
+**Tips:**
+- Triggers should start with `!` or `:` for easy recognition
+- Keep triggers short (2-4 characters) for quick typing
+- URL must include `{query}` placeholder
+- URL must start with `http://` or `https://`
+</Callout>

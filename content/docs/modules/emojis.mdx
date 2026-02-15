@@ -1,0 +1,92 @@
+---
+title: Emojis
+description: Search and copy emojis
+---
+
+The emojis module provides a searchable emoji picker.
+
+<img src="/img/modules-emojis.webp" alt="Emoji picker grid" />
+
+## Usage
+
+<Steps>
+<Step>
+### Open emoji mode
+
+```bash
+zlaunch show --modes emojis
+```
+</Step>
+
+<Step>
+### Browse or search
+
+Type to filter emojis by name, or use arrow keys to navigate the grid.
+</Step>
+
+<Step>
+### Press Enter
+
+The selected emoji is copied to your clipboard.
+</Step>
+</Steps>
+
+## Navigation
+
+| Key | Action |
+|-----|--------|
+| `↑` `↓` `←` `→` | Navigate grid |
+| `Tab` | Next emoji |
+| `Shift+Tab` | Previous emoji |
+| `Enter` | Copy selected emoji |
+
+## Searching
+
+Type to filter emojis by name:
+
+| Query | Results |
+|-------|---------|
+| `smile` | 😀 😄 😊 🙂 |
+| `heart` | ❤️ 💜 💙 💚 |
+| `cat` | 🐱 🐈 😺 😸 |
+
+## Grid Layout
+
+The emoji grid displays 8 columns by default. This is configurable via custom themes:
+
+```toml
+[emoji]
+columns = 8
+cell_size = 72.0
+```
+
+## Quick Access
+
+<Tabs items={['CLI', 'Keybind']}>
+<Tab value="CLI">
+
+```bash
+zlaunch show --modes emojis
+# or
+zlaunch show --modes emoji
+```
+
+</Tab>
+<Tab value="Keybind">
+
+**Hyprland:**
+
+```
+bind = SUPER, E, exec, zlaunch show --modes emojis
+```
+
+**Niri:**
+
+```kdl
+binds {
+    Mod+E { spawn "zlaunch" "show" "--modes" "emojis"; }
+}
+```
+
+</Tab>
+</Tabs>

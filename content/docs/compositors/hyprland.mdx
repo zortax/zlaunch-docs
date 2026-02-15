@@ -1,0 +1,103 @@
+---
+title: Hyprland
+description: Full Hyprland integration
+---
+
+zlaunch has full support for Hyprland with native IPC integration.
+
+## Features
+
+| Feature | Status |
+|---------|--------|
+| Window switching | ✓ Full |
+| Automatic blur | ✓ Full |
+| Workspace awareness | ✓ Full |
+| Focus tracking | ✓ Full |
+| Layer shell | ✓ Full |
+
+## Setup
+
+<Steps>
+<Step>
+### Autostart
+
+Add to `~/.config/hypr/hyprland.conf`:
+
+```
+exec-once = zlaunch
+```
+</Step>
+
+<Step>
+### Keybind
+
+```
+bind = SUPER, Space, exec, zlaunch toggle
+```
+</Step>
+
+<Step>
+### Mode-specific binds (optional)
+
+```
+bind = SUPER, E, exec, zlaunch show --modes emojis
+bind = SUPER, V, exec, zlaunch show --modes clipboard
+bind = SUPER, C, exec, zlaunch show --modes calculator
+```
+</Step>
+</Steps>
+
+## Automatic Blur
+
+By default, zlaunch applies blur when opening:
+
+```toml
+hyprland_auto_blur = true  # default
+```
+
+This injects a layer rule via Hyprland IPC:
+
+```
+layerrule = blur on,match:class zlaunch
+```
+
+<Callout type="info">
+Disable with `hyprland_auto_blur = false` if you prefer manual blur rules.
+</Callout>
+
+### Manual Blur Configuration
+
+If you disable auto-blur, add to your Hyprland config:
+
+```
+layerrule = blur on,match:class zlaunch
+layerrule = blur_popups on,match:class zlaunch
+layerrule = ignore_alpha 0.35,match:class zlaunch
+```
+
+## IPC Details
+
+zlaunch communicates via the Hyprland socket at:
+
+```
+$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket.sock
+```
+
+Commands used:
+- `j/clients` — List windows
+- `dispatch focuswindow address:0x...` — Focus window
+- `keyword layerrule ...` — Apply blur rules
+
+## Troubleshooting
+
+<Callout type="warn">
+**Windows not showing?**
+- Verify `$HYPRLAND_INSTANCE_SIGNATURE` is set
+- Check socket exists at the expected path
+</Callout>
+
+<Callout type="warn">
+**Blur not working?**
+- Ensure `decoration:blur:enabled = true` in Hyprland config
+- Check `hyprland_auto_blur` is not disabled
+</Callout>

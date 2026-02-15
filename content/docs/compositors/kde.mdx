@@ -1,0 +1,80 @@
+---
+title: KDE Plasma
+description: Partial KDE/KWin support
+---
+
+<Callout type="warn">
+**Experimental** — Some features have known issues.
+</Callout>
+
+## Feature Status
+
+| Feature | Status |
+|---------|--------|
+| Application launching | ✓ Working |
+| Window switching | ⚠ Buggy |
+| Automatic blur | ✗ Not supported |
+| Clipboard history | ⚠ Not working |
+| Layer shell | ✗ Not supported |
+
+## Setup
+
+### Keybind
+
+<Steps>
+<Step>
+Open **System Settings**
+</Step>
+
+<Step>
+Go to **Shortcuts** → **Custom Shortcuts**
+</Step>
+
+<Step>
+Create a new shortcut with command:
+
+```
+zlaunch toggle
+```
+</Step>
+
+<Step>
+Assign your preferred key combination
+</Step>
+</Steps>
+
+### Autostart
+
+1. Open **System Settings**
+2. Go to **Startup and Shutdown** → **Autostart**
+3. Add zlaunch
+
+## VRAM Usage
+
+KDE uses a default window size of 1920×1080. If you experience issues:
+
+```toml
+window_size = [1920.0, 1080.0]
+```
+
+## Recommendations
+
+For the best experience on KDE, disable problematic modules:
+
+```toml
+combined_modules = [
+  "calculator",
+  "applications",
+  "actions",
+  "search"
+]
+window_size = [1920.0, 1080.0]
+```
+
+<Callout type="info">
+KDE support uses D-Bus (`zbus`) rather than Unix sockets, which is why some features behave differently.
+</Callout>
+
+## Future Improvements
+
+KDE support is actively being developed. Check the [project repository](https://github.com/zortax/zlaunch) for updates.

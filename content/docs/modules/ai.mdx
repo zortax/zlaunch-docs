@@ -1,0 +1,99 @@
+---
+title: AI
+description: Chat with LLMs
+---
+
+The AI module lets you query language models directly from zlaunch.
+
+<img src="/img/modules-ai.webp" alt="AI module showing a streamed response" />
+
+## Supported Providers
+
+| Provider | Environment Variables |
+|----------|----------------------|
+| Ollama (local) | `OLLAMA_URL`, `OLLAMA_MODEL` |
+| Google Gemini | `GEMINI_API_KEY` |
+| OpenAI | `OPENAI_API_KEY` |
+| OpenRouter | `OPENROUTER_API_KEY`, `OPENROUTER_MODEL` |
+
+<Callout type="info">
+zlaunch checks providers in order and uses the first one configured.
+</Callout>
+
+## Setup
+
+<Tabs items={['Ollama', 'Gemini', 'OpenAI', 'OpenRouter']}>
+<Tab value="Ollama">
+
+**Local LLM with Ollama:**
+
+1. Install and start Ollama
+2. Pull a model: `ollama pull llama2`
+3. Set environment variables:
+
+```bash
+export OLLAMA_URL="http://localhost:11434"
+export OLLAMA_MODEL="llama2"
+```
+
+</Tab>
+<Tab value="Gemini">
+
+```bash
+export GEMINI_API_KEY="your-api-key"
+```
+
+</Tab>
+<Tab value="OpenAI">
+
+```bash
+export OPENAI_API_KEY="your-api-key"
+```
+
+</Tab>
+<Tab value="OpenRouter">
+
+```bash
+export OPENROUTER_API_KEY="your-api-key"
+export OPENROUTER_MODEL="openai/gpt-4"  # optional
+```
+
+</Tab>
+</Tabs>
+
+Add these to your shell profile (`~/.bashrc`, `~/.zshrc`) or compositor config.
+
+## Usage
+
+<Steps>
+<Step>
+### Open AI mode
+
+```bash
+zlaunch show --modes ai
+```
+</Step>
+
+<Step>
+### Type your prompt
+Enter your question or request
+</Step>
+
+<Step>
+### View response
+Response streams in real-time with markdown rendering
+</Step>
+</Steps>
+
+## Features
+
+- **Streaming responses** — See output as it's generated
+- **Markdown rendering** — Code blocks, lists, formatting
+- **Conversation context** — Follow-up questions work
+
+<Callout type="info">
+**Tips:**
+- Ollama runs locally with no API costs
+- Cloud APIs typically have lower latency
+- Responses can be copied to clipboard
+</Callout>

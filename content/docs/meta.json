@@ -1,0 +1,13 @@
+{
+  "title": "zlaunch",
+  "pages": [
+    "index",
+    "getting-started",
+    "configuration",
+    "modules",
+    "themes",
+    "compositors",
+    "cli",
+    "troubleshooting"
+  ]
+}

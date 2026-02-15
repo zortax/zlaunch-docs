@@ -1,0 +1,62 @@
+---
+title: Modes
+description: Configure mode cycling and defaults
+---
+
+## Default Modes
+
+Set which modes are available when cycling with `Ctrl+Tab`:
+
+```toml
+default_modes = ["combined", "emojis", "clipboard"]
+```
+
+### Available Modes
+
+| Mode | Aliases |
+|------|---------|
+| `combined` | — |
+| `applications` | `apps`, `app` |
+| `windows` | `window` |
+| `calculator` | `calc` |
+| `emojis` | `emoji` |
+| `clipboard` | — |
+| `actions` | `action` |
+| `search` | — |
+| `themes` | `theme` |
+| `ai` | — |
+
+## Combined Modules
+
+Control which modules appear in combined mode and their order:
+
+```toml
+combined_modules = [
+  "calculator",
+  "windows",
+  "applications",
+  "emojis",
+  "clipboard",
+  "actions",
+  "themes",
+  "ai",
+  "search"
+]
+```
+
+<Callout type="info">
+Omit modules from the list to hide them from combined view.
+</Callout>
+
+## Complete Example
+
+```toml
+default_modes = ["combined", "applications", "windows", "emojis"]
+
+combined_modules = [
+  "calculator",
+  "windows",
+  "applications",
+  "actions"
+]
+```

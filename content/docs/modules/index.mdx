@@ -1,0 +1,82 @@
+---
+title: Modules
+description: Overview of zlaunch modules
+---
+
+Modules are the building blocks of zlaunch. Each provides specific functionality.
+
+## Available Modules
+
+<Cards>
+  <Card title="Applications" href="/docs/modules/applications">
+    Launch desktop applications
+  </Card>
+  <Card title="Windows" href="/docs/modules/windows">
+    Switch between open windows
+  </Card>
+  <Card title="Calculator" href="/docs/modules/calculator">
+    Evaluate math expressions
+  </Card>
+  <Card title="Emojis" href="/docs/modules/emojis">
+    Search and copy emojis
+  </Card>
+  <Card title="Clipboard" href="/docs/modules/clipboard">
+    Browse clipboard history
+  </Card>
+  <Card title="Actions" href="/docs/modules/actions">
+    System actions (power, lock, etc.)
+  </Card>
+  <Card title="Search" href="/docs/modules/search">
+    Web search with custom providers
+  </Card>
+  <Card title="AI" href="/docs/modules/ai">
+    Chat with LLMs
+  </Card>
+</Cards>
+
+## Combined Mode
+
+In combined mode, all enabled modules are shown together. Results are grouped by category and sorted by relevance.
+
+```toml
+combined_modules = [
+  "calculator",
+  "windows",
+  "applications",
+  "emojis",
+  "clipboard",
+  "actions",
+  "themes",
+  "ai",
+  "search"
+]
+```
+
+<Callout type="info">
+There's also a **Themes** module for switching themes from within the launcher.
+</Callout>
+
+## Accessing Modules
+
+<Tabs items={['CLI', 'Keyboard']}>
+<Tab value="CLI">
+
+```bash
+zlaunch show --modes emojis
+zlaunch toggle --modes applications
+```
+
+</Tab>
+<Tab value="Keyboard">
+
+- `Ctrl+Tab` — next mode
+- `Ctrl+Shift+Tab` — previous mode
+
+Configure which modes to cycle through:
+
+```toml
+default_modes = ["combined", "emojis", "clipboard"]
+```
+
+</Tab>
+</Tabs>

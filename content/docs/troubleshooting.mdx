@@ -1,0 +1,221 @@
+---
+title: Troubleshooting
+description: Common issues and debugging
+---
+
+## Debug Logging
+
+Run zlaunch with verbose logging:
+
+```bash
+RUST_LOG=debug zlaunch
+```
+
+This outputs detailed information about configuration, compositor detection, IPC, and module initialization.
+
+---
+
+## Common Issues
+
+### Daemon Won't Start
+
+<Callout type="error">
+**Error: Address already in use**
+</Callout>
+
+A previous daemon didn't clean up. Remove the socket:
+
+```bash
+rm $XDG_RUNTIME_DIR/zlaunch.sock
+zlaunch
+```
+
+<Callout type="error">
+**Already running**
+</Callout>
+
+Only one daemon can run at a time:
+
+```bash
+zlaunch quit
+zlaunch
+```
+
+---
+
+### Launcher Doesn't Appear
+
+<Steps>
+<Step>
+### Verify daemon is running
+
+```bash
+pgrep zlaunch
+```
+</Step>
+
+<Step>
+### Try showing manually
+
+```bash
+zlaunch show
+```
+</Step>
+
+<Step>
+### Check compositor integration
+
+```bash
+echo $HYPRLAND_INSTANCE_SIGNATURE  # for Hyprland
+echo $NIRI_SOCKET                   # for Niri
+```
+</Step>
+</Steps>
+
+---
+
+### Window Switching Not Working
+
+<Callout type="warn">
+**Unsupported compositor**
+
+Window switching requires Hyprland or Niri. KDE support is experimental. Other compositors fall back to no-op.
+</Callout>
+
+<Callout type="warn">
+**Socket permission issues**
+
+Verify you can access the compositor socket. Check `$XDG_RUNTIME_DIR` permissions.
+</Callout>
+
+---
+
+### Clipboard History Empty
+
+| Issue | Solution |
+|-------|----------|
+| Protocol not supported | Requires `wlr-data-control-v1` (KDE doesn't fully support) |
+| Monitor not running | Check debug logs for clipboard errors |
+
+---
+
+### Applications Not Launching
+
+<Tabs items={['Empty Command', 'Terminal Apps', 'Wrong Environment']}>
+<Tab value="Empty Command">
+
+Check the `.desktop` file's `Exec` field—some apps have malformed entries.
+
+</Tab>
+<Tab value="Terminal Apps">
+
+Set `$TERMINAL` environment variable:
+
+```bash
+export TERMINAL=kitty
+```
+
+Add to your shell profile.
+
+</Tab>
+<Tab value="Wrong Environment">
+
+Apps inherit the daemon's environment. Restart daemon if you changed shell variables.
+
+</Tab>
+</Tabs>
+
+---
+
+### Theme Not Loading
+
+| Issue | Solution |
+|-------|----------|
+| Theme not found | Check name matches exactly (case-sensitive) |
+| Custom theme | Verify file is in `~/.config/zlaunch/themes/` with `.toml` extension |
+| Invalid TOML | Validate syntax with a TOML checker |
+
+---
+
+### Config Not Applied
+
+<Callout type="warn">
+**File location**
+
+Must be at `~/.config/zlaunch/config.toml` (not `~/.zlaunch/config.toml`)
+</Callout>
+
+<Callout type="info">
+**Reload required**
+
+Most changes auto-reload. For major changes, run `zlaunch reload`.
+</Callout>
+
+---
+
+### High VRAM Usage
+
+Set explicit window size:
+
+```toml
+window_size = [1920.0, 1080.0]
+```
+
+This prevents allocating an 8K buffer on some compositors.
+
+---
+
+### Blur Not Working (Hyprland)
+
+<Steps>
+<Step>
+### Ensure blur is enabled in Hyprland
+
+```
+decoration:blur:enabled = true
+```
+</Step>
+
+<Step>
+### Check auto-blur is enabled
+
+```toml
+hyprland_auto_blur = true
+```
+</Step>
+
+<Step>
+### Or add manual layer rules
+
+```
+layerrule = blur on,match:class zlaunch
+layerrule = blur_popups on,match:class zlaunch
+layerrule = ignore_alpha 0.35,match:class zlaunch
+```
+</Step>
+</Steps>
+
+---
+
+### AI Mode Errors
+
+| Issue | Solution |
+|-------|----------|
+| No response | Verify API key is set in environment |
+| Ollama not working | Ensure service is running, model exists (`ollama list`) |
+| Wrong provider | zlaunch uses first configured: Ollama → Gemini → OpenAI → OpenRouter |
+
+---
+
+## Getting Help
+
+If you can't resolve an issue:
+
+1. Run with `RUST_LOG=debug` and capture output
+2. Check existing issues on [GitHub](https://github.com/zortax/zlaunch)
+3. Open a new issue with:
+   - Compositor and version
+   - zlaunch version
+   - Configuration file
+   - Debug log output
+   - Steps to reproduce

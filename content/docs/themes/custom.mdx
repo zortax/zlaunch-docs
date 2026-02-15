@@ -1,0 +1,228 @@
+---
+title: Custom Themes
+description: Create your own theme
+---
+
+Create custom themes by adding TOML files to `~/.config/zlaunch/themes/`.
+
+## Basic Structure
+
+```toml
+name = "my-theme"
+
+# Window
+window_background = "#282c34e6"
+window_border = "#61afef26"
+window_border_radius = 16.0
+
+# Input
+input_background = "#1e2127"
+input_text = "#abb2bf"
+input_placeholder = "#5c6370"
+input_caret = "#61afef"
+
+# List items
+item_background = "#282c34"
+item_background_hover = "#2c313a"
+item_background_selected = "#3e4451"
+item_text = "#abb2bf"
+item_text_secondary = "#5c6370"
+
+# Icons
+icon_background = "#61afef26"
+icon_color = "#61afef"
+
+# Section headers
+section_text = "#e5c07b"
+section_background = "#282c34"
+
+# Scrollbar
+scrollbar_track = "#1e2127"
+scrollbar_thumb = "#4b5263"
+scrollbar_thumb_hover = "#5c6370"
+```
+
+## Color Formats
+
+<Tabs items={['Hex', 'RGB/RGBA', 'HSLA']}>
+<Tab value="Hex">
+
+```toml
+# Short form
+window_background = "#abc"      # #RRGGBB expanded
+window_background = "#abcd"     # #RRGGBBAA expanded
+
+# Full form
+window_background = "#282c34"   # RGB
+window_background = "#282c34e6" # RGBA (e6 = 90% opacity)
+```
+
+</Tab>
+<Tab value="RGB/RGBA">
+
+TOML inline table with 0-255 values:
+
+```toml
+# RGB (alpha defaults to 255)
+window_background = { r = 40, g = 44, b = 52 }
+
+# RGBA
+window_background = { r = 40, g = 44, b = 52, a = 230 }
+```
+
+</Tab>
+<Tab value="HSLA">
+
+TOML inline table with 0.0-1.0 values:
+
+```toml
+# h = hue (0-1), s = saturation (0-1), l = lightness (0-1), a = alpha (0-1)
+window_background = { h = 0.611, s = 0.13, l = 0.18, a = 0.9 }
+```
+
+</Tab>
+</Tabs>
+
+<Callout type="info">
+Hex strings are the most common and concise. Use RGBA/HSLA objects when you need precise control.
+</Callout>
+
+## Module Sections
+
+### Calculator
+
+```toml
+[calculator]
+icon_background = "#61afef26"
+result_text = "#98c379"
+error_color = "#e06c75"
+```
+
+### Emoji Grid
+
+```toml
+[emoji]
+columns = 8
+cell_size = 72.0
+cell_background = "#2c313a"
+cell_background_hover = "#3e4451"
+```
+
+### AI Responses
+
+```toml
+[ai]
+user_bubble_background = "#61afef33"
+assistant_bubble_background = "#2c313a"
+error_background = "#e06c75"
+```
+
+### Markdown
+
+```toml
+[markdown]
+code_background = "#1e2127"
+code_text = "#e5c07b"
+link_color = "#61afef"
+heading_color = "#e5c07b"
+```
+
+### Clipboard
+
+```toml
+[clipboard]
+preview_background = "#1e2127"
+preview_border = "#3e4451"
+```
+
+### Action Indicator
+
+```toml
+[action_indicator]
+background = "#e5c07b26"
+text = "#e5c07b"
+```
+
+## Complete Example
+
+```toml
+name = "my-dark-theme"
+
+# Window
+window_background = "#1a1b26ee"
+window_border = "#7aa2f733"
+window_border_radius = 12.0
+
+# Input
+input_background = "#16161e"
+input_text = "#c0caf5"
+input_placeholder = "#565f89"
+input_caret = "#7aa2f7"
+
+# Items
+item_background = "#1a1b26"
+item_background_hover = "#24283b"
+item_background_selected = "#292e42"
+item_text = "#c0caf5"
+item_text_secondary = "#565f89"
+
+# Icons
+icon_background = "#7aa2f726"
+icon_color = "#7aa2f7"
+
+# Sections
+section_text = "#e0af68"
+section_background = "#1a1b26"
+
+# Scrollbar
+scrollbar_track = "#16161e"
+scrollbar_thumb = "#292e42"
+scrollbar_thumb_hover = "#3b4261"
+
+[calculator]
+result_text = "#9ece6a"
+error_color = "#f7768e"
+
+[emoji]
+columns = 8
+cell_size = 72.0
+
+[ai]
+user_bubble_background = "#7aa2f733"
+assistant_bubble_background = "#24283b"
+
+[markdown]
+code_background = "#16161e"
+code_text = "#e0af68"
+link_color = "#7aa2f7"
+```
+
+## Applying Your Theme
+
+<Steps>
+<Step>
+### Save your theme
+
+Save to `~/.config/zlaunch/themes/my-dark-theme.toml`
+</Step>
+
+<Step>
+### Set in config
+
+```toml
+theme = "my-dark-theme"
+```
+</Step>
+
+<Step>
+### Or apply via CLI
+
+```bash
+zlaunch theme set my-dark-theme
+```
+</Step>
+</Steps>
+
+<Callout type="info">
+Themes are hot-reloaded—edit and save to see changes instantly.
+</Callout>

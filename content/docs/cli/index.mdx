@@ -1,0 +1,176 @@
+---
+title: CLI Reference
+description: Complete command reference
+---
+
+## Daemon Management
+
+### Start Daemon
+
+```bash
+zlaunch
+```
+
+Starts the zlaunch daemon. Run once, typically via compositor autostart.
+
+<Callout type="info">
+Creates a socket at `$XDG_RUNTIME_DIR/zlaunch.sock` for client communication.
+</Callout>
+
+### Stop Daemon
+
+```bash
+zlaunch quit
+```
+
+### Reload Daemon
+
+```bash
+zlaunch reload
+```
+
+Fully restarts the daemon. Use after config changes that don't auto-reload.
+
+---
+
+## Window Control
+
+<Tabs items={['Toggle', 'Show', 'Hide']}>
+<Tab value="Toggle">
+
+```bash
+zlaunch toggle
+```
+
+Shows if hidden, hides if visible. **Bind this to a key.**
+
+With specific modes:
+
+```bash
+zlaunch toggle --modes combined,emojis,clipboard
+```
+
+</Tab>
+<Tab value="Show">
+
+```bash
+zlaunch show
+```
+
+With specific modes:
+
+```bash
+zlaunch show --modes emojis
+zlaunch show --modes applications,windows
+```
+
+</Tab>
+<Tab value="Hide">
+
+```bash
+zlaunch hide
+```
+
+</Tab>
+</Tabs>
+
+---
+
+## Mode Selection
+
+The `--modes` flag accepts a comma-separated list:
+
+| Mode | Aliases |
+|------|---------|
+| `applications` | `apps`, `app` |
+| `windows` | `window` |
+| `calculator` | `calc` |
+| `emojis` | `emoji` |
+| `clipboard` | — |
+| `actions` | `action` |
+| `search` | — |
+| `themes` | `theme` |
+| `ai` | — |
+| `combined` | — |
+
+---
+
+## Theme Commands
+
+<Tabs items={['Show Current', 'List', 'Set']}>
+<Tab value="Show Current">
+
+```bash
+zlaunch theme
+```
+
+Prints the currently active theme.
+
+</Tab>
+<Tab value="List">
+
+```bash
+zlaunch theme list
+```
+
+Lists all available themes (bundled + custom).
+
+</Tab>
+<Tab value="Set">
+
+```bash
+zlaunch theme set <name>
+```
+
+Examples:
+
+```bash
+zlaunch theme set dracula
+zlaunch theme set catppuccin-mocha
+zlaunch theme set my-custom-theme
+```
+
+</Tab>
+</Tabs>
+
+---
+
+## Exit Codes
+
+| Code | Meaning |
+|------|---------|
+| 0 | Success |
+| 1 | Error (connection failed, invalid args, etc.) |
+
+---
+
+## Examples
+
+### Hyprland Keybinds
+
+```
+bind = SUPER, Space, exec, zlaunch toggle
+bind = SUPER, E, exec, zlaunch show --modes emojis
+bind = SUPER, V, exec, zlaunch show --modes clipboard
+bind = SUPER SHIFT, T, exec, zlaunch show --modes themes
+```
+
+### Check if Daemon is Running
+
+```bash
+if zlaunch hide 2>/dev/null; then
+    echo "Daemon is running"
+else
+    echo "Daemon not running, starting..."
+    zlaunch &
+fi
+```
+
+### Theme Switcher Script
+
+```bash
+#!/bin/bash
+themes=$(zlaunch theme list)
+selected=$(echo "$themes" | fzf)
+[ -n "$selected" ] && zlaunch theme set "$selected"
+```

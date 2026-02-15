@@ -1,0 +1,10 @@
+{
+  "title": "Configuration",
+  "pages": [
+    "index",
+    "window-settings",
+    "modes",
+    "fuzzy-matching",
+    "search-providers"
+  ]
+}

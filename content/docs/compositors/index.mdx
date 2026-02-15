@@ -1,0 +1,48 @@
+---
+title: Compositor Support
+description: Wayland compositor integration
+---
+
+zlaunch is designed for Wayland and integrates with various compositors.
+
+## Feature Matrix
+
+| Feature | Hyprland | Niri | KDE/KWin |
+|---------|:--------:|:----:|:--------:|
+| Application launching | ✓ | ✓ | ✓ |
+| Window switching | ✓ | ✓ | ⚠ |
+| Automatic blur | ✓ | ✗ | ✗ |
+| Clipboard history | ✓ | ✓ | ⚠ |
+| Workspace info | ✓ | ✓ | ✗ |
+| Focus tracking | ✓ | ✓ | ✗ |
+| Layer shell | ✓ | ✓ | ✗ |
+
+<Callout type="info">
+✓ = Full support, ⚠ = Partial/experimental, ✗ = Not supported
+</Callout>
+
+## Detection
+
+zlaunch auto-detects your compositor via environment variables:
+
+| Compositor | Environment Variable |
+|------------|---------------------|
+| Hyprland | `HYPRLAND_INSTANCE_SIGNATURE` |
+| Niri | `NIRI_SOCKET` |
+| KDE | `KDE_SESSION_VERSION` |
+
+<Callout type="warn">
+If no supported compositor is detected, zlaunch falls back to basic functionality (application launching only).
+</Callout>
+
+<Cards>
+  <Card title="Hyprland" href="/docs/compositors/hyprland">
+    Full integration with blur & IPC
+  </Card>
+  <Card title="Niri" href="/docs/compositors/niri">
+    Full window switching support
+  </Card>
+  <Card title="KDE Plasma" href="/docs/compositors/kde">
+    Experimental support
+  </Card>
+</Cards>

@@ -1,0 +1,102 @@
+---
+title: First Launch
+description: Starting the zlaunch daemon and binding it to a key
+---
+
+## Starting the Daemon
+
+zlaunch uses a daemon architecture—this enables instant response times and continuous clipboard history monitoring. Start it with:
+
+```bash
+zlaunch
+```
+
+The daemon runs in the background and creates a socket at `$XDG_RUNTIME_DIR/zlaunch.sock` (typically `/run/user/<uid>/zlaunch.sock`).
+
+<Callout type="info">
+To stop the daemon: `zlaunch quit`
+</Callout>
+
+## Autostart
+
+Add zlaunch to your compositor's autostart:
+
+<Tabs items={['Hyprland', 'Niri']}>
+<Tab value="Hyprland">
+
+Add to `~/.config/hypr/hyprland.conf`:
+
+```bash
+exec-once = zlaunch
+```
+
+</Tab>
+<Tab value="Niri">
+
+Add to `~/.config/niri/config.kdl`:
+
+```kdl
+spawn-at-startup "zlaunch"
+```
+
+</Tab>
+</Tabs>
+
+## Keybind Setup
+
+Use `zlaunch toggle` to show/hide the launcher.
+
+<Tabs items={['Hyprland', 'Niri', 'KDE Plasma']}>
+<Tab value="Hyprland">
+
+```bash
+bind = SUPER, Space, exec, zlaunch toggle
+```
+
+</Tab>
+<Tab value="Niri">
+
+```kdl
+binds {
+    Mod+Space { spawn "zlaunch" "toggle"; }
+}
+```
+
+</Tab>
+<Tab value="KDE Plasma">
+
+1. Open **System Settings** → **Shortcuts** → **Custom Shortcuts**
+2. Create a new shortcut
+3. Set command to `zlaunch toggle`
+4. Assign your preferred key
+
+</Tab>
+</Tabs>
+
+## Test It
+
+<Steps>
+<Step>
+### Start the daemon
+
+```bash
+zlaunch
+```
+</Step>
+
+<Step>
+### Press your keybind
+
+The launcher should appear centered on your screen.
+
+<img src="/img/first-launch.webp" alt="zlaunch after first launch" />
+</Step>
+
+<Step>
+### Try it out
+
+- Type to search applications
+- Press **Enter** to launch
+- Press **Escape** to hide
+</Step>
+</Steps>

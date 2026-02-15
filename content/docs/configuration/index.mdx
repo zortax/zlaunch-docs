@@ -1,0 +1,58 @@
+---
+title: Configuration
+description: Overview of zlaunch configuration
+---
+
+zlaunch is configured via a TOML file:
+
+```
+~/.config/zlaunch/config.toml
+```
+
+<Callout type="info">
+Create this file if it doesn't exist. All settings are optional with sensible defaults.
+</Callout>
+
+## Example Configuration
+
+```toml
+theme = "one-dark"
+launcher_size = [800.0, 500.0]
+enable_backdrop = true
+enable_transparency = true
+hyprland_auto_blur = true
+
+default_modes = ["combined", "emojis", "clipboard"]
+combined_modules = ["calculator", "windows", "applications", "actions"]
+
+[fuzzy_match]
+show_best_match = true
+
+[[search_providers]]
+name = "GitHub"
+trigger = "!gh"
+url = "https://github.com/search?q={query}"
+```
+
+## Reloading
+
+<Callout>
+Configuration is automatically watched for changes. For a full reload, run `zlaunch reload`.
+</Callout>
+
+## Configuration Sections
+
+<Cards>
+  <Card title="Window Settings" href="/docs/configuration/window-settings">
+    Size, backdrop, transparency, blur
+  </Card>
+  <Card title="Modes" href="/docs/configuration/modes">
+    Mode cycling and combined view
+  </Card>
+  <Card title="Fuzzy Matching" href="/docs/configuration/fuzzy-matching">
+    Search scoring and behavior
+  </Card>
+  <Card title="Search Providers" href="/docs/configuration/search-providers">
+    Custom web search engines
+  </Card>
+</Cards>

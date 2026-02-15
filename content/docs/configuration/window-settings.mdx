@@ -1,0 +1,75 @@
+---
+title: Window Settings
+description: Configure launcher size, backdrop, and transparency
+---
+
+## Launcher Size
+
+Set the dimensions of the launcher panel:
+
+```toml
+launcher_size = [800.0, 500.0]  # [width, height] in pixels
+```
+
+| Property | Default | Recommended Range |
+|----------|---------|-------------------|
+| Width | 600.0 | 300 – 2000 px |
+| Height | 400.0 | 200 – 1500 px |
+
+## Window Size (VRAM Optimization)
+
+When using a backdrop overlay, set an explicit buffer size to reduce VRAM usage:
+
+```toml
+window_size = [1920.0, 1080.0]
+```
+
+<Callout type="warn">
+Only set this if you experience high VRAM usage. It must be at least as large as `launcher_size`.
+</Callout>
+
+Default: Automatic (8K on most compositors, 1920×1080 on KDE)
+
+## Backdrop
+
+The backdrop is a transparent overlay behind the launcher. Clicking it hides the launcher.
+
+```toml
+enable_backdrop = true  # default
+```
+
+<Callout type="info">
+When disabled, the launcher window is just the panel—no click-outside-to-close behavior.
+</Callout>
+
+## Transparency
+
+Enable transparent background rendering:
+
+```toml
+enable_transparency = true  # default
+```
+
+## Hyprland Auto Blur
+
+Automatically apply Hyprland blur rules via IPC:
+
+```toml
+hyprland_auto_blur = true  # default
+```
+
+This applies blur layer rules via Hyprland IPC.
+
+<Callout type="info">
+Only applies when running on Hyprland.
+</Callout>
+
+## Complete Example
+
+```toml
+launcher_size = [900.0, 600.0]
+window_size = [1920.0, 1080.0]
+enable_backdrop = true
+enable_transparency = true
+hyprland_auto_blur = true
+```

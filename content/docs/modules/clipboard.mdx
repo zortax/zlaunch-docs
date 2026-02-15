@@ -1,0 +1,63 @@
+---
+title: Clipboard
+description: Browse and paste from clipboard history
+---
+
+The clipboard module maintains a history of copied items.
+
+<img src="/img/modules-clipboard.webp" alt="Clipboard history with text entries" />
+
+## Requirements
+
+<Callout type="warn">
+Clipboard history requires Wayland data-control protocol support (`wlr-data-control-v1`).
+</Callout>
+
+| Compositor | Support |
+|------------|---------|
+| Hyprland | ✓ |
+| Niri | ✓ |
+| Sway | ✓ |
+| Other wlroots | ✓ |
+| KDE/KWin | ⚠ Experimental |
+
+## Usage
+
+1. Open zlaunch in clipboard mode
+2. Browse your clipboard history
+3. Type to search entries
+4. Press Enter to copy the selected entry back to clipboard
+5. Paste with `Ctrl+V` or middle-click
+
+## Supported Content
+
+| Type | Description |
+|------|-------------|
+| **Text** | Plain text of any length |
+| **Images** | Displayed as thumbnails |
+
+## How It Works
+
+zlaunch runs a background monitor that watches for clipboard changes. When you copy something, it's added to the history.
+
+<Callout type="info">
+The history is stored in memory and cleared when the daemon stops.
+</Callout>
+
+## Mode Access
+
+```bash
+zlaunch show --modes clipboard
+```
+
+**Quick keybind (Hyprland):**
+
+```
+bind = SUPER, V, exec, zlaunch show --modes clipboard
+```
+
+## Notes
+
+<Callout type="warn">
+**Privacy:** Clipboard history is not persisted across restarts, but sensitive data (passwords) will appear in history during a session. Be aware when sharing your screen.
+</Callout>

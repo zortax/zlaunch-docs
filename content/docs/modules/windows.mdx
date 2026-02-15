@@ -1,0 +1,60 @@
+---
+title: Windows
+description: Switch between open windows
+---
+
+The windows module lists all open windows and lets you quickly switch focus.
+
+<img src="/img/modules-windows.webp" alt="Window switcher showing open windows" />
+
+## Compositor Support
+
+| Compositor | Support | Notes |
+|------------|---------|-------|
+| Hyprland | ✓ Full | IPC, workspace info, focus tracking |
+| Niri | ✓ Full | IPC, window listing, focus |
+| KDE/KWin | ⚠ Partial | Experimental, some bugs |
+| Other | ✗ | Module will be empty |
+
+<Callout type="warn">
+On unsupported compositors, the windows module won't show any entries.
+</Callout>
+
+## Usage
+
+1. Open zlaunch (or switch to windows mode)
+2. See all open windows with their titles
+3. Type to filter by window title
+4. Press Enter to focus the window
+
+## Display Format
+
+Each window entry shows:
+
+- **Application name**
+- **Window title**
+- **Workspace indicator** (when available)
+
+The currently focused window is marked.
+
+## Automatic Filtering
+
+zlaunch filters out:
+- Special windows
+- Unmapped windows
+- Hidden windows
+- The zlaunch window itself
+
+## Mode Access
+
+```bash
+zlaunch show --modes windows
+```
+
+<Callout type="info">
+**Tip:** You can also open zlaunch directly in windows mode via the CLI:
+
+```bash
+zlaunch toggle --modes windows
+```
+</Callout>

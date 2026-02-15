@@ -1,0 +1,174 @@
+---
+title: Installation
+description: How to install zlaunch on your system
+---
+
+<Tabs items={['Nix', 'Arch Linux', 'Binary', 'From Source']}>
+<Tab value="Nix">
+
+## Nix / NixOS
+
+zlaunch provides a Nix flake for easy installation.
+
+### Try it out
+
+```bash
+nix shell github:zortax/zlaunch/0.4.0
+```
+
+### Flake installation
+
+Add zlaunch to your flake inputs:
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    zlaunch.url = "github:zortax/zlaunch/0.4.0";
+  };
+
+  outputs = { nixpkgs, zlaunch, ... }: {
+    # Use zlaunch.packages.${system}.default
+  };
+}
+```
+
+**NixOS configuration:**
+
+```nix
+{ inputs, pkgs, ... }:
+{
+  environment.systemPackages = [
+    inputs.zlaunch.packages.${pkgs.system}.default
+  ];
+}
+```
+
+**home-manager:**
+
+```nix
+{ inputs, pkgs, ... }:
+{
+  home.packages = [
+    inputs.zlaunch.packages.${pkgs.system}.default
+  ];
+}
+```
+
+</Tab>
+<Tab value="Arch Linux">
+
+## Arch Linux (AUR)
+
+### Pre-compiled binary (recommended)
+
+```bash
+paru -S zlaunch-bin
+```
+
+### Build from source
+
+```bash
+paru -S zlaunch-git
+```
+
+<Callout type="info">
+Replace `paru` with your preferred AUR helper (`yay`, `aura`, etc.)
+</Callout>
+
+</Tab>
+<Tab value="Binary">
+
+## Pre-built Binary
+
+Download pre-built binaries from [GitHub Releases](https://github.com/zortax/zlaunch/releases).
+
+### Available Architectures
+
+| Architecture | Artifact |
+|--------------|----------|
+| x86_64 | `zlaunch-<version>-x86_64-linux.tar.gz` |
+| aarch64 | `zlaunch-<version>-aarch64-linux.tar.gz` |
+
+### Installation
+
+```bash
+# Download (replace VERSION and ARCH)
+curl -LO https://github.com/zortax/zlaunch/releases/download/VERSION/zlaunch-VERSION-ARCH-linux.tar.gz
+
+# Extract
+tar -xzf zlaunch-VERSION-ARCH-linux.tar.gz
+
+# Install
+sudo cp zlaunch-VERSION-ARCH-linux/zlaunch /usr/local/bin/
+```
+
+### Runtime Dependencies
+
+The binary requires these libraries at runtime:
+
+- wayland
+- freetype
+- fontconfig
+- openssl
+- libxkbcommon
+- vulkan (ICD loader)
+
+<Callout type="warn">
+**glibc Compatibility**
+
+The pre-built binaries are compiled on Ubuntu 24.04 and require **glibc 2.39 or newer**. This means they work on:
+
+- Ubuntu 24.04+
+- Fedora 40+
+- Arch Linux (rolling)
+- Debian 13 (trixie)+
+
+Older distributions (Ubuntu 22.04, Debian 12, etc.) should [build from source](#from-source) instead.
+</Callout>
+
+</Tab>
+<Tab value="From Source">
+
+## Building from Source
+
+### Prerequisites
+
+- Rust (stable, edition 2024)
+- System dependencies:
+  - wayland, libxkbcommon
+  - freetype, fontconfig
+  - openssl
+  - vulkan-loader
+  - pkg-config
+
+**Arch Linux:**
+
+```bash
+sudo pacman -S wayland libxkbcommon freetype2 fontconfig openssl vulkan-icd-loader pkgconf
+```
+
+### Build
+
+```bash
+git clone https://github.com/zortax/zlaunch.git
+cd zlaunch
+cargo build --release
+```
+
+The binary will be at `./target/release/zlaunch`.
+
+### Install
+
+```bash
+sudo cp ./target/release/zlaunch /usr/local/bin/
+```
+
+</Tab>
+</Tabs>
+
+## Verify Installation
+
+```bash
+zlaunch --version
+```

@@ -1,0 +1,43 @@
+---
+title: Actions
+description: System actions like shutdown, reboot, and lock
+---
+
+The actions module provides quick access to system operations.
+
+## Built-in Actions
+
+| Action | Description | Command |
+|--------|-------------|---------|
+| Shutdown | Power off | `systemctl poweroff` |
+| Reboot | Restart | `systemctl reboot` |
+| Suspend | Sleep | `systemctl suspend` |
+| Lock | Lock screen | `loginctl lock-session` |
+| Logout | End session | `loginctl terminate-user $USER` |
+
+## Usage
+
+1. Open zlaunch
+2. Type the action name (e.g., `shut`, `lock`)
+3. Press Enter to execute
+
+<Callout type="info">
+Actions appear in combined mode with lower priority than applications and windows. This prevents accidental execution.
+</Callout>
+
+## Mode Access
+
+```bash
+zlaunch show --modes actions
+```
+
+## Demoting Actions
+
+If actions appear too prominently in combined mode, reduce their score:
+
+```toml
+[fuzzy_match]
+action_score_multiplier = 0.5  # default: 0.8
+```
+
+This makes actions rank lower unless you specifically search for them.
