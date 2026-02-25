@@ -40,6 +40,42 @@ url = "https://github.com/search?q={query}"
 Configuration is automatically watched for changes. For a full reload, run `zlaunch reload`.
 </Callout>
 
+## Using Home Manager
+
+zlaunch can be declaratively configured in Nix using Home Manager  using the `settings` attribute.
+The written Nix configuration is directly translated to TOML, so the same settings are used with a minimum adaptation for Nix syntax.
+
+```nix
+{
+  services.zlaunch = {
+    enable = true;
+
+    settings = {
+      theme = "one-dark";
+      launcher_size = [ 800.0 500.0 ];
+      enable_backdrop = true;
+      enable_transparency = true;
+      hyprland_auto_blur = true;
+
+      default_modes = ["combined" "emojis" "clipboard"];
+      combined_modules = ["calculator" "windows" "applications" "actions"];
+
+      fuzzy_match = {
+        show_best_match = true;
+      };
+
+      search_providers = [
+        {
+          name = "GitHub";
+          trigger = "!gh";
+          url = "https://github.com/search?q={query}";
+        }
+      ];
+    };
+  };
+}
+```
+
 ## Configuration Sections
 
 <Cards>
