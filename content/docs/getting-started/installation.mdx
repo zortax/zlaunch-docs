@@ -13,7 +13,7 @@ zlaunch provides a Nix flake for easy installation.
 ### Try it out
 
 ```bash
-nix shell github:zortax/zlaunch/0.4.0
+nix shell github:zortax/zlaunch/0.5.0
 ```
 
 ### Flake installation
@@ -24,7 +24,7 @@ Add zlaunch to your flake inputs:
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    zlaunch.url = "github:zortax/zlaunch/0.4.0";
+    zlaunch.url = "github:zortax/zlaunch/0.5.0";
   };
 
   outputs = { nixpkgs, zlaunch, ... }: {
@@ -44,14 +44,17 @@ Add zlaunch to your flake inputs:
 }
 ```
 
-**home-manager:**
+**Home Manager:**
+
+zlaunch also provides a Home Manager module for easy installation and configuration with Nix. The module is available as `zlaunch.homeManagerModules.default`.
 
 ```nix
-{ inputs, pkgs, ... }:
 {
-  home.packages = [
-    inputs.zlaunch.packages.${pkgs.system}.default
+  imports = [
+    zlaunch.homeManagerModules.default
   ];
+
+  services.zlaunch.enable = true;
 }
 ```
 

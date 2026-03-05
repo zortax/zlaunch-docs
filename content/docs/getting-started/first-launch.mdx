@@ -42,6 +42,31 @@ spawn-at-startup "zlaunch"
 </Tab>
 </Tabs>
 
+**Home Manager:**
+
+The Home Manager module exposes an option to autostart zlaunch using a systemd user service.
+By default, the service is started at `graphical-session.target`, but this can be configured to start at your compositor's session target, such as `hyprland-session.target`.
+
+```nix
+{
+  imports = [
+    zlaunch.homeManagerModules.default
+  ];
+
+  services.zlaunch = {
+    enable = true;
+
+    systemd = {
+      enable = true;
+
+      autoStart = true; # default
+      target = "graphical-session"; # default
+    };
+  };
+}
+```
+
+
 ## Keybind Setup
 
 Use `zlaunch toggle` to show/hide the launcher.
